@@ -1,27 +1,29 @@
-name: My first GitHub Action
-'on':
+
+name: My First GitHub Action
+
+on:
   push:
-    branches:
-      - main
+    branches: [main]
+
   pull_request:
-    branches:
-      - main
+    branches: [main]
+
 jobs:
   test:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Get the repo
+      - name: Get Repository
         uses: actions/checkout@v4
 
-      - name: setthing up of the python
+      - name: Setup Python
         uses: actions/setup-python@v4
-        with: 
-            python-version: "3.12"
+        with:
+          python-version: "3.12"
 
-      - name: python program
-        run: python hello.py
-
-      - name: Check Python Syntax
-        run: python -m py_compile hello.py
-
-
+      - name: Run Python Checks
+        run: |
+          echo "Starting CI..."
+          python hello.py
+          python -m py_compile hello.py
+          echo "All checks passed!"
